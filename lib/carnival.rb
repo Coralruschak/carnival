@@ -17,8 +17,10 @@ class Carnival
       
       popularity[ride] = ride.rider_log.values.sum
     end
-    popularity.values.max_by
-    return popularity.keys.first
+    popularity = popularity.max_by do |key, value|
+      value
+    end
+    return popularity[0]
   end
 
   def most_profitable_ride
@@ -27,8 +29,10 @@ class Carnival
       
       profits[ride] = ride.total_revenue
     end
-    profits.values.max_by
-    return profits.keys.first
+    profits = profits.max_by do |key, value|
+      value
+    end
+    return profits[0]
   end
 
   def total_revenue

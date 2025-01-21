@@ -83,7 +83,7 @@ RSpec.describe Carnival do
     end
   end
 
-  describe 'total_revenue' do
+  describe '#total_revenue' do
     it 'returns ride object ridden the highest number of times by visitors' do
       @carnival1.add_ride(@ride1)
       @carnival1.add_ride(@ride2)
