@@ -37,17 +37,17 @@ RSpec.describe Visitor do
   end
 
   describe '#preferences' do
-    it 'defaults an empty array for preferances' do
-      expect(@visitor1.preferances).to eq([])
-      expect(@visitor2.preferances).to eq([])
-      expect(@visitor3.preferances).to eq([])
+    it 'defaults an empty array for preferences' do
+      expect(@visitor1.preferences).to eq([])
+      expect(@visitor2.preferences).to eq([])
+      expect(@visitor3.preferences).to eq([])
     end
 
     it 'can have preferences added using add_preference method' do
       @visitor1.add_preference(:gentle)
       @visitor1.add_preference(:thrilling)
 
-      expect(@visitor1.preferances).to eq([:gentle, :thrilling])
+      expect(@visitor1.preferences).to eq([:gentle, :thrilling])
     end
   end
 
