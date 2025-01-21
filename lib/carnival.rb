@@ -14,10 +14,10 @@ class Carnival
   def most_popular_ride
     popularity = {}
     @rides.each do |ride|
-      binding.pry
-      popularity[ride] = ride.values.sum
+      
+      popularity[ride] = ride.rider_log.values.sum
     end
-    popularity.sort
-    return popularity.last.key
+    popularity.values.sort
+    return popularity.keys.first
   end
 end
