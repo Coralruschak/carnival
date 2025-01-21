@@ -1,25 +1,70 @@
-Use TDD to create a `Carnival` class that adds the following functionality:
-(You may choose to add additional methods not listed here to help you build this functionality.)
+require './lib/carnival'
+require './lib/visitor'
+require './lib/ride'
+require 'pry'
 
-1. Each carnival has a duration, as well as a way to read that data
-2. Each carnival can add rides and can list those rides.
+RSpec.describe Carnival do
+  before(:each) do
+    @visitor1 = Visitor.new('Bruce', 54, '$10')
+    @visitor2 = Visitor.new('Tucker', 36, '$5')
+    @visitor3 = Visitor.new('Penny', 64, '$15')
+    @visitor1.add_preference(:gentle)
+    @visitor2.add_preference(:gentle)
+    @visitor3.add_preference(:thrilling)
+    @ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+    @ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
+    @ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+    @carnival1 = Carnival.new('Fun', '14 days')
 
-Additionally, use TDD to add the following functionality to the `Carnival` class. A passing challenge will complete *at least* two of the following. We recommend completing all three if you have time.
+  end
 
-1. A carnival can tell us its most popular ride. Most popular will be the ride that has been riden the most amount of times by all visitors (not based on unique riders).
-1. A carnival can tell us its most profitable ride
-1. A carnival can calculate the total revenue earned from all its rides.
+  describe '#initialize' do
+    it 'exists' do
+      expect(@carnival1).to be_a Carnival
+    end
 
-| Method Name             | Return Value |
-|-------------            |--------------|
-| `duration`              | integer representing days (ex:`14` to represent 14 days/2 weeks) |
-| `add_ride(ride)`        | up to you    |
-| `rides`                 | `Array` containing `Ride` objects |
-| `most_popular_ride`     | `Ride` object |
-| `most_profitable_ride`  | `Ride` object |
-| `total_revenue`         | integer |
+    it 'has a name' do
+      expect(@carnival1.name).to eq('Fun')
+    end
 
-@total_revenue += @admission_fee
+    it 'has a duration' do
+      expect(@carnival1.duration).to eq(14)
+    end
+  end
+
+  describe '#rides' do
+    it 'defaults an empty array' do
+      expect(@carnival1.rides).to eq([])
+    end
+
+    it 'adds rides to array via add_ride(ride)' do
+      @carnival1.add_ride(@ride1)
+      @carnival1.add_ride(@ride2)
+      @carnival1.add_ride(@ride3)
+  
+
+      expect(@carnival1.rides).to eq([@ride1, @ride2, @ride3])
+    end
+  end
+
+  describe 'most_popular_ride' do
+    it 'returns ride object ridden the highest number of times by visitors' do
+      @carnival1.add_ride(@ride1)
+      @carnival1.add_ride(@ride2)
+      @carnival1.add_ride(@ride3)
+  
+
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor1)
+      @ride2.board_rider(@visitor2)
+      @ride2.board_rider(@visitor2)
+      @ride3.board_rider(@visitor2)
+
+      expect(@canival1.most_popular_ride).to eq(@ride1)
+    end
+  end
 
 end
+
 
