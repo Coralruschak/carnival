@@ -110,7 +110,7 @@ RSpec.describe Ride do
       @ride1.board_rider(@visitor2)
       @ride1.board_rider(@visitor1)
     
-      expect(@ride_1.total_revenue).to eq(3)
+      expect(@ride1.total_revenue).to eq(3)
     end    
   end
 end
